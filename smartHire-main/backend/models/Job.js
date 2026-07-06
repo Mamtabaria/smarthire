@@ -1,0 +1,18 @@
+const mongoose = require("mongoose");
+
+const jobSchema = new mongoose.Schema(
+  {
+    clientId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    title: { type: String, required: true, trim: true },
+    company: { type: String, required: true, trim: true },
+    type: { type: String, required: true, enum: ["Internship", "Job"] },
+    skillsRequired: [{ type: String }],
+    duration: { type: String, required: true },
+    location: { type: String, required: true },
+    description: { type: String, required: true },
+    deadline: { type: Date, required: true },
+  },
+  { timestamps: { createdAt: true, updatedAt: true } }
+);
+
+module.exports = mongoose.model("Job", jobSchema);
